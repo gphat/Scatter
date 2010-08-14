@@ -3,7 +3,7 @@
   <display-name>Example</display-name>
 
   <listener>
-    <listener-class>com.coldhardcode.Scatter</listener-class>
+    <listener-class>com.coldhardcode.scatter.ServletListener</listener-class>
   </listener>
 
   <!-- Declare the existence of a servlet. -->

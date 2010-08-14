@@ -1,45 +1,12 @@
 package com.coldhardcode
 
 import java.io.{PrintWriter, IOException}
-import javax.servlet.{RequestDispatcher, ServletContextListener, ServletContextEvent}
+import javax.servlet.{RequestDispatcher}
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
-import com.coldhardcode.scatter.annotation.Public
-import com.coldhardcode.WebClasspathDiscoverer
+import com.coldhardcode.scatter.Dispatcher
 
-import com.impetus.annovention.{Discoverer,ClasspathDiscoverer}
-import com.impetus.annovention.listener.{MethodAnnotationDiscoveryListener}
-
-class Scatter extends HttpServlet with ServletContextListener with MethodAnnotationDiscoveryListener {
-
-    def contextInitialized(event:ServletContextEvent) : Unit = {
-
-        println("### Starting Up")
-
-        val disc:Discoverer = new WebClasspathDiscoverer(event.getServletContext);
-        disc.addAnnotationListener(this)
-        println("### Firing Discoverer")
-        disc.discover
-        println("### Done")
-    }
-
-    def contextDestroyed(event:ServletContextEvent) : Unit = {
-
-        println("### Shutting Down")
-    }
-
-    /* Annotation Shit! */
-
-    override def discovered(clas:String, method:String, annotation:String) : Unit = {
-
-        println("Discovered " + clas + "." + method + ": " + annotation);
-    }
-    
-    override def supportedAnnotations() : Array[java.lang.String] = {
-
-        println("Registering interesting Annotations")
-        return Array("com.coldhardcode.scatter.annotation.Public")
-    };
+class Scatter extends HttpServlet {
 
     /* Servlet Shit! */
 
@@ -63,6 +30,12 @@ class Scatter extends HttpServlet with ServletContextListener with MethodAnnotat
         println("Query String: " + req.getQueryString)
         println("Path Info: " + req.getPathInfo)
         println("Path Translated: " + req.getPathTranslated)
+
+        val actionName = req.getPathInfo.substring(1)
+        println("Looking for: " + actionName)
+
+/*        val d:Dispatcher = new Dispatcher;*/
+        println(Dispatcher.getAction(actionName))
 
         val defaultTemplate:String = req.getPathInfo
 

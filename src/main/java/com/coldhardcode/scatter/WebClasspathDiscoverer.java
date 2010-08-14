@@ -1,4 +1,4 @@
-package com.coldhardcode;
+package com.coldhardcode.scatter;
 
 import java.net.MalformedURLException;
 import java.net.URL;

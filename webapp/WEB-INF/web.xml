@@ -2,9 +2,9 @@
 <web-app>
   <display-name>Example</display-name>
 
-  <!-- <listener>
+  <listener>
     <listener-class>com.coldhardcode.Scatter</listener-class>
-  </listener> -->
+  </listener>
 
   <!-- Declare the existence of a servlet. -->
   <servlet>
@@ -15,6 +15,6 @@
   <!-- Map URLs to that servlet. -->
   <servlet-mapping>
     <servlet-name>Scatter</servlet-name>
-    <url-pattern>/servlet</url-pattern>
+    <url-pattern>/servlet/*</url-pattern>
   </servlet-mapping>
 </web-app>

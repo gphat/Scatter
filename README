@@ -1,0 +1,22 @@
+Scatter
+
+Scatter is an experimental web framework inspired by Perl's Catalyst[0].  It is
+also a project I am using to learn Scala.
+
+Internals
+
+Scatter uses a ServletContextListener (com.coldhardcode.scatter.ServletListener)
+to populate a Dispatcher (com.coldhardcode.scatter.Dispatcher). It populates
+the dispatcher with classes and method names identified by special annotations
+using annovention[1].
+
+The Scatter servlet (currently com.coldhardcode.scatter.Scatter) then uses
+the dispatcher to fire the requested method and naively execute a JSP.
+
+This entire codebase is sloppy and naive.  I hope to grow it to be less bad and
+have more features.
+
+You can create a WAR file using "sbt package"
+
+[0] http://www.catalystframework.org/
+[1] http://code.google.com/p/annovention/

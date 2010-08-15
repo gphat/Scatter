@@ -15,12 +15,14 @@ object Dispatcher {
     def getAction(path:String, context:Context) : Unit = {
 
         println(actions.mkString)
-        println("Tryna find it!")
         val result = actions.get(path)
 
         result match {
             case None => println("No match for " + path)
-            case Some(x) => Class.forName(x).getMethod(path).invoke(Class.forName(x).newInstance, Array(context))
+            case Some(x) => {
+                val meth = Class.forName(x).getMethod(path, Class.forName("com.coldhardcode.scatter.Context"))
+                meth.invoke(Class.forName(x).newInstance, context)
+            }
         }
     }
 }

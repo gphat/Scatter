@@ -12,7 +12,7 @@ object Dispatcher {
         println(actions.mkString)
     }
 
-    def getAction(path:String) : String = {
+    def getAction(path:String, context:Context) : Unit = {
 
         println(actions.mkString)
         println("Tryna find it!")
@@ -20,9 +20,7 @@ object Dispatcher {
 
         result match {
             case None => println("No match for " + path)
-            case Some(x) => Class.forName(x).getMethod(path).invoke(Class.forName(x).newInstance)
+            case Some(x) => Class.forName(x).getMethod(path).invoke(Class.forName(x).newInstance, Array(context))
         }
-        
-        return "asdasd"
     }
 }

@@ -3,6 +3,6 @@
   <title>Wee!</title>
  </head>
  <body>
-  <h1>Hello!</h1>
+  <h1>[% request.getAttribute('stash').get('hello') %]</h1>
  </body>
 </html>

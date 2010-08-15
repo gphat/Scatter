@@ -9,7 +9,7 @@
   <!-- Declare the existence of a servlet. -->
   <servlet>
     <servlet-name>Scatter</servlet-name>
-    <servlet-class>com.coldhardcode.Scatter</servlet-class>
+    <servlet-class>com.coldhardcode.scatter.Servlet</servlet-class>
   </servlet>
 
   <!-- Map URLs to that servlet. -->

@@ -4,6 +4,8 @@ import java.io.{PrintWriter, IOException}
 import javax.servlet.{RequestDispatcher}
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
+import com.coldhardcode.scatter.view.JSP
+
 class Servlet extends HttpServlet {
 
     override def doGet(req:HttpServletRequest, resp:HttpServletResponse) : Unit = {
@@ -18,7 +20,7 @@ class Servlet extends HttpServlet {
 
     def handleRequest(req:HttpServletRequest, resp:HttpServletResponse) : Unit = {
 
-        val context:Context = new Context(req, resp)
+        val context:Context = new Context(getServletConfig.getServletContext, req, resp)
 
         println("Request Information")
         println("Request URI: " + req.getRequestURI)
@@ -32,11 +34,14 @@ class Servlet extends HttpServlet {
         val actionName = req.getPathInfo.substring(1)
         println("Looking for: " + actionName)
 
-        println(Dispatcher.getAction(actionName, context))
+        // Dispatch!
+        Dispatcher.getAction(actionName, context)
 
-        val defaultTemplate:String = req.getPathInfo
+        if(context.stash.get("template").isEmpty) {
+            context.stash.put("template", req.getPathInfo.substring(1))
+        }
 
-        val dispatcher:RequestDispatcher = getServletConfig.getServletContext.getRequestDispatcher(defaultTemplate + ".jsp")
-        dispatcher.forward(req, resp)
+        val view = new JSP;
+        view.process(context)
     }
 }

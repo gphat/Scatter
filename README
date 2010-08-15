@@ -11,7 +11,9 @@ the dispatcher with classes and method names identified by special annotations
 using annovention[1].
 
 The Scatter servlet (currently com.coldhardcode.scatter.Scatter) then uses
-the dispatcher to fire the requested method and naively execute a JSP.
+the dispatcher to fire the requested method, passing it a Context
+(com.coldhardcode.scatter.Context) object. Last, a JSP view is instantiated
+and it's process method is called with the context as the argument.
 
 This entire codebase is sloppy and naive.  I hope to grow it to be less bad and
 have more features.
